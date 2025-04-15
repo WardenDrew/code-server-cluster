@@ -15,6 +15,7 @@ fi
 useradd -m -s /bin/bash "${USERNAME}"
 echo "${PASSWORD}" | passwd "${USERNAME}" --stdin
 
+chown -R "${USERNAME}":"${USERNAME}" /app
 chown -R "${USERNAME}":"${USERNAME}" /config
 chown -R "${USERNAME}":"${USERNAME}" /projects
 
