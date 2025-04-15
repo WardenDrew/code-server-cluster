@@ -27,6 +27,11 @@ RUN tar xf \
     /tmp/code-server.tar.gz -C \
     /app/code-server --strip-components=1
 
+# Install extensions
+RUN mkdir -p /app/extensions
+RUN /app/code-server/bin/code-server --extensions-dir /app/extensions --install-extension ms-dotnettools.vscode-dotnet-runtime
+RUN /app/code-server/bin/code-server --extensions-dir /app/extensions --install-extension muhammad-sammy.csharp
+
 # Cleanup Setup Steps
 RUN apt clean
 RUN rm -rf \
@@ -43,6 +48,10 @@ RUN chmod -R 775 /startup
 # Copy Defaults
 COPY default /default
 RUN chmod -R 775 /default
+
+# Setup initial folders
+RUN mkdir -p /config
+RUN mkdir -p /projects
 
 EXPOSE 8080
 ENTRYPOINT ["/startup/entrypoint.sh"]
