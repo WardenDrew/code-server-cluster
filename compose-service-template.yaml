@@ -1,0 +1,11 @@
+  ${USERNAME}:
+    image: code-server-cluster
+    volumes:
+      - config:/config
+      - projects:/projects
+    ports:
+      - ${PORT}:8080
+    environment:
+      - PORT=${PORT}
+      - USERNAME=${USERNAME}
+      - PASSWORD=${PASSWORD}
